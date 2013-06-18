@@ -1,0 +1,43 @@
+ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_interface", \
+        ATTRS{idVendor}=="3195", ATTRS{idProduct}=="f190", \
+        DRIVER=="", RUN+="/sbin/modprobe -b cp210x"
+
+ACTION=="add", SUBSYSTEM=="drivers", \
+        ENV{DEVPATH}=="/bus/usb-serial/drivers/cp210x", \
+        ATTR{new_id}="3195 f190"
+
+ACTION=="add", KERNEL=="ttyUSB*", \
+	ATTRS{interface}=="MSO-19 Link Instruments", \
+        ATTRS{bInterfaceNumber}=="00", \
+	SYMLINK+="MSO-19-%n"
+
+ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_interface", \
+        ATTRS{idVendor}=="3195", ATTRS{idProduct}=="f280", \
+        DRIVER=="", RUN+="/sbin/modprobe -b cp210x"
+
+ACTION=="add", SUBSYSTEM=="drivers", \
+        ENV{DEVPATH}=="/bus/usb-serial/drivers/cp210x", \
+        ATTR{new_id}="3195 f280"
+
+ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_interface", \
+        ATTRS{idVendor}=="3195", ATTRS{idProduct}=="f281", \
+        DRIVER=="", RUN+="/sbin/modprobe -b cp210x"
+
+ACTION=="add", SUBSYSTEM=="drivers", \
+        ENV{DEVPATH}=="/bus/usb-serial/drivers/cp210x", \
+        ATTR{new_id}="3195 f281"
+
+ACTION=="add", KERNEL=="ttyUSB*", \
+	ATTRS{interface}=="MSO-28", \
+        ATTRS{bInterfaceNumber}=="00", \
+	SYMLINK+="MSO-28-%n"
+
+ACTION=="add", KERNEL=="ttyUSB*", \
+	ATTRS{interface}=="MSO-28 Link Instruments", \
+        ATTRS{bInterfaceNumber}=="00", \
+	SYMLINK+="MSO-28-%n"
+
+SUBSYSTEM=="usb", ATTRS{idVendor}=="3195", ATTRS{idProduct}=="f190", MODE="0664", GROUP="plugdev"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="3195", ATTRS{idProduct}=="f280", MODE="0664", GROUP="plugdev"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="3195", ATTRS{idProduct}=="f281", MODE="0664", GROUP="plugdev"
+KERNEL=="ttyUSB*", ATTRS{idVendor}=="3195", MODE="0666", GROUP="dialout"
